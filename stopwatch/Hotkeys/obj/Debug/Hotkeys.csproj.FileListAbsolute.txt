@@ -1,0 +1,4 @@
+C:\Users\Zeca\Desktop\speedrun stopwatch V2\stopwatch\Hotkeys\bin\Debug\Hotkeys.dll
+C:\Users\Zeca\Desktop\speedrun stopwatch V2\stopwatch\Hotkeys\bin\Debug\Hotkeys.pdb
+C:\Users\Zeca\Desktop\speedrun stopwatch V2\stopwatch\Hotkeys\obj\Debug\Hotkeys.dll
+C:\Users\Zeca\Desktop\speedrun stopwatch V2\stopwatch\Hotkeys\obj\Debug\Hotkeys.pdb

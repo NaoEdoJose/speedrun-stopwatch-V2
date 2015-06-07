@@ -44,7 +44,6 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(260, 147);
             this.listBox1.TabIndex = 0;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button1
             // 
@@ -76,7 +75,6 @@
             this.timer.TabIndex = 3;
             this.timer.Text = "TIMER";
             this.timer.TextAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.timer.Click += new System.EventHandler(this.timer_Click);
             // 
             // timer1
             // 
@@ -89,22 +87,20 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(201, 20);
             this.textBox1.TabIndex = 4;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 257);
+            this.ClientSize = new System.Drawing.Size(281, 242);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.timer);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.listBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Speedrun Stopwatch";
             this.Load += new System.EventHandler(this.Form1_Load);
-
             this.ResumeLayout(false);
             this.PerformLayout();
 

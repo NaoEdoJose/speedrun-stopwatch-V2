@@ -6,58 +6,65 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
 using System.Windows.Forms;
+using Hotkeys;
 
 namespace stopwatch
 {
     public partial class Form1 : Form
     {
-        private KeyHandler ghk;
-        private KeyHandler ghW;
-        public int element = 0;
-
-        private void HandleHotkey()
-        {
-            if (listBox1.Items.Count >= 1)
-            {
-              
-                timer1.Start();
-
-            }
-            else
-            {
-                MessageBox.Show("Please add a Segment to start the timer");
-                textBox1.Focus();
-            }
-            if (timer1.Enabled && timer.Text != "TIMER")
-            {
-                //listBox1.Items.IndexOf
-            }
-            
-        }
-        private void HandleStop() { MessageBox.Show("fuck you"); }
-
-        protected override void WndProc(ref Message m)
-        {
-            if (m.Msg == 0X2D)
-            {
-
-                HandleHotkey();
-          
-            }
-            if (m.Msg == 0x0100) { HandleStop(); }
-            base.WndProc(ref m);
-        }
-        
+        private Hotkeys.GlobalHotkeys ghk;
+        private Hotkeys.GlobalHotkeys ghw;
         public Form1()
         {
             InitializeComponent();
-            ghk = new KeyHandler(Keys.Insert, this);
+            ghk = new Hotkeys.GlobalHotkeys(Constants.CTRL , Keys.F, this);
+            ghw = new Hotkeys.GlobalHotkeys(Constants.CTRL , Keys.G, this);
             ghk.Register();
-            ghW = new KeyHandler(Keys.Home, this);
-            ghW.Register();
+            ghw.Register();
         }
 
+
+        private Keys GetKey(IntPtr LParam)
+        {
+            return (Keys)((LParam.ToInt32()) >> 16);
+        }
+
+        protected void TimeHandlerStart() {
+
+            if (listBox1.Items.Count != 0) timer1.Start();
+            else MessageBox.Show("Please add a Segment before starting your run");
+            
+        }
+        protected void TimeHandlerStop()
+        {
+
+            timer1.Stop();
+
+        }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == Hotkeys.Constants.WM_HOTKEY_MSG_ID)
+                switch (GetKey(m.LParam)) { 
+                 
+                    case Keys.F:
+
+                        TimeHandlerStart();
+
+                    break;
+                    
+                    case Keys.G:
+                        TimeHandlerStop();
+                        break;
+
+                    
+                }
+               
+            base.WndProc(ref m);
+        }
+  
         int hour, min, sec, ms = 00;
 
         private void button2_Click(object sender, EventArgs e)
@@ -83,11 +90,6 @@ namespace stopwatch
             }
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             timer.Text = hour + ":" + min + ":" + sec + ":" + ms;
@@ -102,14 +104,6 @@ namespace stopwatch
 
         }
 
-        private void timer_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+
